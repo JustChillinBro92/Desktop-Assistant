@@ -1,38 +1,42 @@
 import subprocess
-import shutil
-
+ 
+from core.app_scanner import APP_CACHE, find_best_match
 from core.steam_resolver import scan_installed_games, find_game
 
 
 # -----------------------------
-# Desktop app aliases
+# OPEN SHORTCUT
 # -----------------------------
-APP_ALIASES = {
-    "chrome": ["chrome", "browser", "google chrome"],
-    "vscode": ["vscode", "vs code", "code"],
-    "spotify": ["spotify", "music"],
-    "notepad": ["notepad"],
-    "explorer": ["file explorer", "files"],
-    "discord": ["discord"],
-    "steam": ["steam"]
-}
-
-ALIAS_TO_APP = {}
-for app, aliases in APP_ALIASES.items():
-    for a in aliases:
-        ALIAS_TO_APP[a] = app
+def open_shortcut(path):
+    subprocess.Popen(path, shell=True)
 
 
 # -----------------------------
 # Open desktop app
 # -----------------------------
-def open_app(app: str):
-    path = shutil.which(app)
+def open_app(app_name: str):
+    app_name = app_name.lower().strip()
+    print(f"[APP RESOLVER] Searching for: {app_name}")
 
-    if path:
-        subprocess.Popen(path)
-    else:
-        subprocess.Popen(f"start {app}", shell=True)
+    apps = APP_CACHE
+
+    # exact match
+    if app_name in apps:
+        print(f"[APP] Exact match → {app_name}")
+        open_shortcut(apps[app_name])
+        return True
+    
+    # fuzzy match
+    match = find_best_match(app_name, apps)
+
+    if match:
+        print(f"[APP] Exact match → {match}")
+        open_shortcut(apps[match])
+        return True
+    
+    print("[BLOCKED] App not found")
+    return False
+
 
 
 # -----------------------------
@@ -51,7 +55,7 @@ def open_game(game_name: str):
 
 
 # -----------------------------
-# MAIN ROUTER (context preserved)
+# MAIN ROUTER
 # -----------------------------
 def open_something(command: dict):
     cmd_type = command.get("type")
@@ -61,29 +65,13 @@ def open_something(command: dict):
 
     print(f"[ROUTER] type={cmd_type}, target={target}")
 
-    # -------------------------
-    # OPEN APP
-    # -------------------------
     if cmd_type == "open_app":
-        # verify app exists via alias system
-        for alias, app in ALIAS_TO_APP.items():
-            if alias in target:
-                open_app(app)
-                return
+        success = open_app(target)
+        if not success:
+            print("[FALLBACK] Could not find app")
 
-        # fallback attempt
-        open_app(target)
-        return
-
-    # -------------------------
-    # OPEN GAME
-    # -------------------------
     elif cmd_type == "open_game":
         open_game(target)
-        return
 
-    # -------------------------
-    # UNKNOWN SAFETY
-    # -------------------------
-    else: 
+    else:
         print("[BLOCKED] Unknown or unsupported command")
