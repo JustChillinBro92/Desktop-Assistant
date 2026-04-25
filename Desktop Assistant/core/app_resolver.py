@@ -1,14 +1,38 @@
 import subprocess
  
+from core.uwp_scanner import UWP_CACHE
 from core.app_scanner import APP_CACHE, find_best_match
 from core.steam_resolver import scan_installed_games, find_game
+
 
 
 # -----------------------------
 # OPEN SHORTCUT
 # -----------------------------
-def open_shortcut(path):
+def open_path(app_name, app_info):
+    path = app_info["path"]
+    source = app_info["source"]
+
+    app_name = app_name.lower().strip()
+
+    # UWP handling
+    if source == "uwp":
+        query = app_name.replace(" ", "")
+
+        for name, app_id in UWP_CACHE.items():
+            normalized_name = name.lower().replace(" ", "")
+
+            if query in normalized_name:
+                print(f"[UWP] Launching → {name}")
+                subprocess.Popen(f'explorer.exe shell:AppsFolder\\{app_id}', shell=True)
+                return
+
+        print("[UWP] No match found")
+        return
+
+    # normal apps
     subprocess.Popen(path, shell=True)
+
 
 
 # -----------------------------
@@ -18,22 +42,57 @@ def open_app(app_name: str):
     app_name = app_name.lower().strip()
     print(f"[APP RESOLVER] Searching for: {app_name}")
 
-    apps = APP_CACHE
+    gui_apps = {
+        k: v for k, v in APP_CACHE.items() 
+        if v["source"] in ["start_menu", "desktop", "uwp"]
+    }
+    cli_apps = {
+        k: v for k, v in APP_CACHE.items() 
+        if v["source"] == "path"
+    }
 
-    # exact match
-    if app_name in apps:
-        print(f"[APP] Exact match → {app_name}")
-        open_shortcut(apps[app_name])
+    # 1. exact GUI match
+    if app_name in gui_apps:
+        print(f"[APP] Exact GUI match → {app_name}")
+        open_path(app_name, gui_apps[app_name])
         return True
     
-    # fuzzy match
-    match = find_best_match(app_name, apps)
+    # 2. UWP DIRECT LOOKUP
+    query = app_name.replace(" ", "")
 
+    for name, app_id in UWP_CACHE.items():
+        normalized = name.lower().replace(" ", "")
+
+        if query in normalized:
+            print(f"[UWP] Launching → {name}")
+            subprocess.Popen(
+                f'explorer.exe shell:AppsFolder\\{app_id}',
+                shell=True
+            )
+            return True
+
+    # 3 fuzzy GUI match
+    match = find_best_match(app_name, gui_apps)
     if match:
-        print(f"[APP] Exact match → {match}")
-        open_shortcut(apps[match])
+        print(f"[APP] Fuzzy GUI match → {match}")
+        open_path(match, gui_apps[match])
         return True
-    
+
+    # 4. exact CLI match
+    if app_name in cli_apps:
+        print(f"[APP] Exact CLI match → {app_name}")
+        open_path(app_name, cli_apps[app_name])
+        return True
+
+    # 5. final system fallback
+    try:
+        print("[APP] Trying system fallback...")
+        subprocess.Popen(f"start {app_name}", shell=True)
+        return True
+    except Exception as e:
+        print("[FALLBACK ERROR]", e)
+
+    # 6. app not found
     print("[BLOCKED] App not found")
     return False
 
