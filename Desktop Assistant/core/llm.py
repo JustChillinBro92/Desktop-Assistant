@@ -1,7 +1,9 @@
-import requests
+import os
+from google import genai
+from dotenv import load_dotenv
 
-OLLAMA_URL = "http://localhost:11434/api/chat"
-MODEL = "llama3:8b-instruct-q4_K_M"
+load_dotenv()
+MODEL = "gemini-3.1-flash-lite-preview"
 
 SYSTEM_PROMPT = """
 You are a desktop assistant that converts user requests into structured JSON commands.
@@ -25,11 +27,15 @@ AVAILABLE ACTIONS:
 ---
 
 RULES:
-- Use "chat" for ANY normal conversation, question, or greeting
-- NEVER use "unknown" for valid English sentences
-- Use "unknown" ONLY if input is meaningless (e.g., "asdfgh", "")
-- Do NOT hallucinate apps or games
-- Always return JSON only
+- If user is chatting or asking a normal question, use "chat".
+- If chat topic is irrelevant to opening apps/games indulge the user (pull data from google if needed).
+- If user wants to open/launch/start software, use "open_app".
+- If user wants to play/open/launch/start a game, use "open_game".
+- NEVER use "unknown" for valid English sentences.
+- Use "unknown" ONLY if input is meaningless (e.g., "asdfgh", "").
+- Do NOT hallucinate apps or games.
+- Always return JSON only.
+- Do NOT include markdown.
 
 ---
 
@@ -57,36 +63,34 @@ User: asdfgh
 → {"type": "unknown"}
 """
 
-def ask_llm(prompt):
-    try:
-        response = requests.post(
-            OLLAMA_URL,
-            json={
-                "model": MODEL,
-                "messages": [
-                    {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user", "content": prompt}
-                ],
-                "stream": False
-            },
-            timeout=(5, 300)
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+# for model in client.models.list():
+#     print(model.name)
+
+# guardrail for markdown response
+def clean_response(text: str) -> str:
+    text = text.strip()
+
+    if text.startswith("```"):
+        text = (
+            text.replace("```json", "")
+            .replace("```JSON", "")
+            .replace("```", "")
+            .strip()
         )
 
-        print("[STATUS]", response.status_code)
-        if response.status_code != 200:
-            print("[ERROR] Ollama returned:", response.text)
-            return '{"type":"unknown"}'
+    return text
 
-        data = response.json()
-        return data["message"]["content"]
 
-    # except requests.exceptions.Timeout:
-    #     print("[ERROR] Ollama timed out")
-    #     return '{"type":"unknown"}'
+def ask_llm(prompt: str) -> str:
+    try:
+        response = client.models.generate_content(
+            model=MODEL,
+            contents=f"{SYSTEM_PROMPT}\n\nUser: {prompt}",
+        )
 
-    # except requests.exceptions.ConnectionError as e:
-    #     print("[ERROR] Could not connect to Ollama:", e)
-    #     return '{"type":"unknown"}'
+        return clean_response(response.text)
 
     except Exception as e:
         print("[LLM ERROR]", e)

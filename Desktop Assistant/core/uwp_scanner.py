@@ -38,4 +38,4 @@ def get_uwp_apps():
         return {}
     
 UWP_CACHE = get_uwp_apps()
-print(UWP_CACHE)
+# print(UWP_CACHE)

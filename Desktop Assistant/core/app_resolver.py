@@ -23,15 +23,16 @@ def open_path(app_name, app_info):
             normalized_name = name.lower().replace(" ", "")
 
             if query in normalized_name:
-                print(f"[UWP] Launching → {name}")
+                print(f"[UWP] Launching → {name}\n")
                 subprocess.Popen(f'explorer.exe shell:AppsFolder\\{app_id}', shell=True)
                 return
 
-        print("[UWP] No match found")
+        print("[UWP] No match found", "\n")
         return
-
+    
     # normal apps
-    subprocess.Popen(path, shell=True)
+    print(f"[APP] Launching → {app_name}\n")
+    subprocess.Popen(f'start "" "{path}"', shell=True)
 
 
 
@@ -46,14 +47,14 @@ def open_app(app_name: str):
         k: v for k, v in APP_CACHE.items() 
         if v["source"] in ["start_menu", "desktop", "uwp"]
     }
-    cli_apps = {
+    path_apps = {
         k: v for k, v in APP_CACHE.items() 
         if v["source"] == "path"
     }
 
     # 1. exact GUI match
     if app_name in gui_apps:
-        print(f"[APP] Exact GUI match → {app_name}")
+        print(f"[APP FOUND] Exact GUI match → {app_name}")
         open_path(app_name, gui_apps[app_name])
         return True
     
@@ -64,7 +65,7 @@ def open_app(app_name: str):
         normalized = name.lower().replace(" ", "")
 
         if query in normalized:
-            print(f"[UWP] Launching → {name}")
+            print(f"[UWP] Launching → {name}\n")
             subprocess.Popen(
                 f'explorer.exe shell:AppsFolder\\{app_id}',
                 shell=True
@@ -78,22 +79,22 @@ def open_app(app_name: str):
         open_path(match, gui_apps[match])
         return True
 
-    # 4. exact CLI match
-    if app_name in cli_apps:
-        print(f"[APP] Exact CLI match → {app_name}")
-        open_path(app_name, cli_apps[app_name])
+    # 4. exact PATH match
+    if app_name in path_apps:
+        print(f"[APP FOUND] Exact PATH match → {app_name}")
+        open_path(app_name, path_apps[app_name])
         return True
 
     # 5. final system fallback
     try:
-        print("[APP] Trying system fallback...")
+        print("[APP FALLBACK] Trying system fallback...\n")
         subprocess.Popen(f"start {app_name}", shell=True)
         return True
     except Exception as e:
-        print("[FALLBACK ERROR]", e)
+        print("[FALLBACK ERROR]", e, "\n")
 
     # 6. app not found
-    print("[BLOCKED] App not found")
+    print("[BLOCKED] App not found\n")
     return False
 
 

@@ -4,16 +4,20 @@ from core.app_resolver import open_something
 
 
 def run_assistant():
-    print("\nAI Assistant Started (type 'exit' to quit)\n")
+    print("")
+    print("+--------------------------------------------+")
+    print("| AI Assistant Started (type 'exit' to quit) |")
+    print("+--------------------------------------------+\n")
 
     while True:
         user_input = input("You: ").strip()
+        print("")
 
         if user_input.lower() in ["exit", "quit"]:
             break
 
         response = ask_llm(user_input)
-        print("LLM:", response)
+        # print("LLM:", response)
 
         command = parse_response(response)
 
@@ -27,10 +31,10 @@ def run_assistant():
         # CHAT HANDLER
         # -----------------------
         elif isinstance(command, dict) and command.get("type") == "chat":
-            print("AI:", command.get("text", ""))
+            print("AI:", command.get("text", ""), "\n")
 
         elif isinstance(command, dict) and command.get("type") == "unknown":
-            print("AI: I didn't understand that.")
+            print("\nAI: I didn't understand that.", "\n")
 
         else:
-            print("AI: I didn't understand that.")
+            print("\nAI: I didn't understand that.", "\n")
