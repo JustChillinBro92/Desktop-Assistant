@@ -6,5 +6,8 @@ def parse_response(text):
     # try JSON first
     try:
         return json.loads(text)
-    except:
-        return {"type": "chat", "text": text}
+    except json.JSONDecodeError:
+        return {
+            "type": "chat", 
+            "text": text
+        }

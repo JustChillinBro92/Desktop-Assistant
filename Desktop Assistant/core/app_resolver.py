@@ -7,7 +7,7 @@ from core.steam_resolver import scan_installed_games, find_game
 
 
 # -----------------------------
-# OPEN SHORTCUT
+# OPEN PATH
 # -----------------------------
 def open_path(app_name, app_info):
     path = app_info["path"]
