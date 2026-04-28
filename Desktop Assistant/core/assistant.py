@@ -5,9 +5,9 @@ from core.app_resolver import open_something
 
 def run_assistant():
     print("")
-    print("+--------------------------------------------+")
-    print("| AI Assistant Started (type 'exit' to quit) |")
-    print("+--------------------------------------------+\n")
+    print("+----------------------------------------------+")
+    print("| AI Assistant Started ( type 'exit' to quit ) |")
+    print("+----------------------------------------------+\n")
 
     while True:
         user_input = input("You: ").strip()
