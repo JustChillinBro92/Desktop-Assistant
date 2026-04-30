@@ -17,7 +17,7 @@ client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 INPUT_SAMPLE_RATE = 16000
 OUTPUT_SAMPLE_RATE = 24000
-CHUNK_SIZE = 2048   
+CHUNK_SIZE = 2048
 
 pyaudio_instance = pyaudio.PyAudio()
 
@@ -213,11 +213,11 @@ def start_voice_agent():
         print("+---------------------------------------------------------+")
 
         while True:
-            input("\nPress Enter, then speak for 5 seconds...\n"
+            input("\nPress Enter, then speak for 4 seconds...\n"
             "Press 'Ctrl + C' to quit\n")
 
             print("[VOICE] Recording...")
-            chunks = record_audio_chunks(seconds=5)
+            chunks = record_audio_chunks(seconds=4)
             chunks = reduce_noise_chunks(chunks)
             # play_user_audio(chunks)
 

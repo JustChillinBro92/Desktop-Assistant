@@ -2,3 +2,6 @@ google-genai
 python-dotenv
 pyaudio
 numpy
+fastapi
+uvicorn
+websockets

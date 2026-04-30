@@ -2,7 +2,8 @@
 LLM_PROVIDER = "gemini"
 
 # model
-MODEL_NAME = "gemini-3.1-flash-lite-preview"
+# MODEL_NAME = "gemini-3.1-flash-lite-preview"
+MODEL_NAME = "gemini-2.5-flash"
 VOICE_MODEL_NAME = "gemini-3.1-flash-live-preview"
 
 
