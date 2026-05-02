@@ -1,0 +1,55 @@
+.input-container {
+    display: flex;
+    justify-content: center;
+}
+
+.input-container .text-box-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.3rem;
+
+    background-color: rgb(30, 30, 30);
+    border-radius: 30px;
+    padding: 10px;
+    width: 50%;
+    color: rgb(207, 207, 207);
+    z-index: 1;
+}
+
+.input-container .text-box-container .text-box {
+    padding: 10px;
+}
+
+.input-container .text-box-container .text-box input {
+    display: flex;
+    padding: 5px;
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    color: rgb(207, 207, 207);
+}
+
+.input-container .text-box-container .buttons-box {
+    display: flex;
+    justify-content: end;
+    font-size: 16px;
+}
+
+.input-container .text-box-container .buttons-box .button {
+    padding: 10px;
+    border-radius: 50%;
+    transition: 0.1s ease-in;
+}
+
+.input-container .text-box-container .buttons-box .button .send-btn {
+    transform: translateX(-2px) rotateZ(40deg); 
+}
+
+.input-container .text-box-container .buttons-box .button:hover {
+    cursor: pointer;
+    background-color: rgb(53, 53, 53);
+}
+

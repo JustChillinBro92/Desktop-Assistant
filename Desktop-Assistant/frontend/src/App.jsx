@@ -5,6 +5,8 @@ import { sendMessage } from './api/assistant_api'
 
 import Home from './pages/Home/Home';
 
+import "./index.css"
+
 const App = () => {
   return (
     <div className="page">

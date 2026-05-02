@@ -2,6 +2,8 @@ import React from 'react'
 
 import ChatMessage from '../ChatMessage/ChatMessage'
 
+import "./ChatWindow.css"
+
 const ChatWindow = ({ messages }) => {
   return (
     <div className="window-container">

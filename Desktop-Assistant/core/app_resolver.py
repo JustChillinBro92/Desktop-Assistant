@@ -23,7 +23,7 @@ def open_path(app_name, app_info):
             normalized_name = name.lower().replace(" ", "")
 
             if query in normalized_name:
-                print(f"[UWP] Launching → {name}\n")
+                print(f"[UWP] Launching -> {name}\n")
                 subprocess.Popen(f'explorer.exe shell:AppsFolder\\{app_id}', shell=True)
                 return
 
@@ -31,7 +31,7 @@ def open_path(app_name, app_info):
         return
     
     # normal apps
-    print(f"[APP] Launching → {app_name}\n")
+    print(f"[APP] Launching -> {app_name}\n")
     subprocess.Popen(f'start "" "{path}"', shell=True)
 
 
@@ -54,7 +54,7 @@ def open_app(app_name: str):
 
     # 1. exact GUI match
     if app_name in gui_apps:
-        print(f"[APP FOUND] Exact GUI match → {app_name}")
+        print(f"[APP FOUND] Exact GUI match -> {app_name}")
         open_path(app_name, gui_apps[app_name])
         return True
     
@@ -65,7 +65,7 @@ def open_app(app_name: str):
         normalized = name.lower().replace(" ", "")
 
         if query in normalized:
-            print(f"[UWP] Launching → {name}\n")
+            print(f"[UWP] Launching -> {name}\n")
             subprocess.Popen(
                 f'explorer.exe shell:AppsFolder\\{app_id}',
                 shell=True
@@ -75,13 +75,13 @@ def open_app(app_name: str):
     # 3 fuzzy GUI match
     match = find_best_match(app_name, gui_apps)
     if match:
-        print(f"[APP] Fuzzy GUI match → {match}")
+        print(f"[APP] Fuzzy GUI match -> {match}")
         open_path(match, gui_apps[match])
         return True
 
     # 4. exact PATH match
     if app_name in path_apps:
-        print(f"[APP FOUND] Exact PATH match → {app_name}")
+        print(f"[APP FOUND] Exact PATH match -> {app_name}")
         open_path(app_name, path_apps[app_name])
         return True
 
