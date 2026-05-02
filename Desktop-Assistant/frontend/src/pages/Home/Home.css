@@ -1,44 +1,60 @@
 .home-container {
-    display: flex;
-    justify-content: start; 
-    height: 100vh;   
+  display: flex;
+  justify-content: start;
+  height: 100vh;
 }
 
 .home-container .home-middle {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 10px;
-    width: 100%;
-    text-align: center;
-    color: rgb(235, 235, 235);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  color: rgb(235, 235, 235);
 }
 
-.home-container .home-middle .header .welcome-msg{
-    display: flex;
-    align-items: start;
-    flex-direction: column;
+.home-container .home-middle .header .welcome-msg {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
 
-    margin: 0 25%;
-    padding: 20px;
-    z-index: 0;
+  margin: 0 25%;
+  padding: 20px;
+  z-index: 0;
+}
+
+.home-container .home-middle .header-chat-active {
+  display: none;
 }
 
 .home-container .home-middle .header .welcome-msg h2 {
-    font-weight: 500;
-    font-size: 25px;
-    animation: ZoomLeft 0.2s ease-in-out;
+  font-weight: 500;
+  font-size: 25px;
+  animation: ZoomLeft 0.2s ease-in-out;
 }
 
 .home-container .home-middle .header .welcome-msg h1 {
-    font-weight: 500;
-    font-size: 36px;
-    animation: ZoomUp 0.2s ease-in-out;
+  font-weight: 500;
+  font-size: 36px;
+  animation: ZoomUp 0.2s ease-in-out;
 }
 
-.home-container .home-middle .msgbox{
-    display: flex;
-    padding: 10px;
+.home-container .home-middle .messages-chat-active {
+  /* height: 100vh;
+  padding-top: 20px; */
+
+  height: calc(100vh - 120px);
+  padding: 20px 0 140px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.home-container .home-middle .input-chat-active {
+  position: fixed;
+  padding-bottom: 20px;
+  width: 100%;
+  bottom: 0;
+  z-index: 2;
 }
 
 @keyframes fadeIn {

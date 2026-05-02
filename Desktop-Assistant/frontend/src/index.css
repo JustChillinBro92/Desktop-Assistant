@@ -3,14 +3,21 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  user-select: none;
+  /* user-select: none; */
   font-family: Outfit;
   scroll-behavior: smooth;
 }
 
-/* ::-webkit-scrollbar {
-  display: none;
-} */
+::-webkit-scrollbar{
+  /* display: none; */
+  width: 8px;
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #383838;
+  border-radius: 10px;
+}
 
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {

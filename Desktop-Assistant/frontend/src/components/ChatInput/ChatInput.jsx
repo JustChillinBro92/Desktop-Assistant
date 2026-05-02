@@ -20,6 +20,11 @@ const ChatInput = ({ handleSend }) => {
     setUserInput("");
   };
 
+  const onEnterPressHandler = (e) => {
+    if(e.key === "Enter")
+      onSendHandler();
+  }
+
   // useEffect(()=>{
   //   console.log(input);
   // },[input])
@@ -32,6 +37,7 @@ const ChatInput = ({ handleSend }) => {
             type="text"
             value={userInput}
             onChange={onChangeHandler}
+            onKeyDown={onEnterPressHandler}
             placeholder="Ask anything"
           />
         </div>

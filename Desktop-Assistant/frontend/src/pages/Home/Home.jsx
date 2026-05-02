@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { sendMessage } from "../../api/assistant_api";
 
@@ -11,6 +10,13 @@ import "./Home.css";
 
 const Home = () => {
   const [messages, setMessages] = useState([]); // store chat history
+  const messagesRef = useRef(null);
+
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   const handleSend = async (userInput) => {
     // add user message to previous chat state
@@ -30,16 +36,21 @@ const Home = () => {
     <div className="home-container">
       <SideBar />
       <div className="home-middle">
-        <div className="header">
+        <div className={messages.length === 0 ? "header" : "header-chat-active"}>
           <div className="welcome-msg">
             <h2>Hi JustChillinBro</h2>
-            <h1> How can I help you today?</h1>
+            <h1>How can I help you today?</h1>
           </div>
         </div>
 
         <div className="content">
-          <ChatWindow messages={messages} />
-          <ChatInput handleSend={handleSend} />
+          <div ref={messagesRef}
+            className={messages.length === 0 ? "" : "messages-chat-active"}>
+            <ChatWindow messages={messages} />
+          </div>
+          <div className={messages.length === 0 ? "" : "input-chat-active"}>
+            <ChatInput handleSend={handleSend} />
+          </div>
         </div>
       </div>
     </div>

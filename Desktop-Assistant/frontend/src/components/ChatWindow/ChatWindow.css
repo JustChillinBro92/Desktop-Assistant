@@ -1,0 +1,14 @@
+.window-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 55%;
+    margin: 0 25%;
+    min-height: 100%;
+}
+
+.window-container .message-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}

@@ -1,0 +1,51 @@
+.message {
+  padding: 5px;
+  font-size: 17px;
+  margin-bottom: 20px;
+}
+
+.message .user {
+  padding: 12px;
+  width: fit-content;
+  border-radius: 20px;
+  margin-left: auto;
+  background-color: rgb(30, 30, 30);
+  margin-bottom: 20px;
+}
+
+.message .assistant {
+  display: flex;
+  position: relative;
+  gap: 1rem;
+
+  padding: 8px;
+  border-radius: 12px;
+  text-align: left;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.message .assistant .icon-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.message .assistant .text {
+  padding-left: 3rem;
+}
+
+.message .assistant .icon {
+  padding: 8px;
+  border-radius: 50%;
+  animation: ringEffect 1.2s ease-in;
+}
+
+@keyframes ringEffect {
+  0% {
+    border-top: 2px solid blue;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
