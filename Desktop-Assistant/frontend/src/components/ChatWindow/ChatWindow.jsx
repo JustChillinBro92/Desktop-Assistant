@@ -6,7 +6,7 @@ import "./ChatWindow.css"
 
 const ChatWindow = ({ messages }) => {
   return (
-    <div className="window-container">
+    <div className={messages.length > 0 ? "window-container" : ""}>
       <div className="message-container">
         {
           messages.map((msgObj, index) => {

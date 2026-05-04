@@ -38,14 +38,17 @@
 .message .assistant .icon {
   padding: 8px;
   border-radius: 50%;
-  animation: ringEffect 1.2s ease-in;
+  animation: ringEffect 1.5s ease-in;
 }
 
 @keyframes ringEffect {
-  0% {
+  0%{
     border-top: 2px solid blue;
+    border-bottom: 2px solid orangered;
   }
   100% {
+    border-top: 2px solid limegreen;
+    border-bottom: 2px solid orange;
     transform: rotate(360deg);
   }
 }

@@ -2,8 +2,8 @@
 LLM_PROVIDER = "gemini"
 
 # model
-MODEL_NAME = "gemini-3.1-flash-lite-preview"
-# MODEL_NAME = "gemini-2.5-flash"
+# MODEL_NAME = "gemini-3.1-flash-lite-preview"
+MODEL_NAME = "gemini-2.5-flash"
 # MODEL_NAME = "gemini-2.5-flash-lite"
 VOICE_MODEL_NAME = "gemini-3.1-flash-live-preview"
 
@@ -13,7 +13,7 @@ TEMPERATURE = 0.2
 MAX_OUTPUT_TOKENS = 256
 
 SYSTEM_PROMPT = """
-You are a female desktop assistant that converts user requests into structured JSON commands.
+You are Luna, a female desktop assistant that converts user requests into structured JSON commands.
 
 You ALWAYS respond in valid JSON.
 

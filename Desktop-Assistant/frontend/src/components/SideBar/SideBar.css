@@ -7,7 +7,12 @@
     background-color: rgb(30, 30, 30);
 }
 
-.sidebar-top, .sidebar-bottom {
+.sidebar-container .inactive-cross {
+    display: none;
+}
+
+.sidebar-container .sidebar-top, 
+.sidebar-container .sidebar-bottom {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -22,7 +27,8 @@
     margin-bottom: 20px;
 }
 
-.sidebar-top .icon, .sidebar-bottom .icon {
+.sidebar-container .sidebar-top .icon, 
+.sidebar-container .sidebar-bottom .icon {
     padding: 8px;
     font-size: 18px;
     border-radius: 50%;
@@ -31,5 +37,95 @@
 
 .hover:hover {
     cursor: pointer;
-    background-color: rgb(53, 53, 53);
+    background-color: rgba(53, 53, 53, 0.504);
+}
+
+
+.sidebar-container-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+
+    width: 250px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(18px);
+    
+    border-right: 2px solid rgba(255, 255, 255, 0.093);
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.463);
+
+    animation: sidebarOpen 0.35s ease forwards;
+}
+
+.sidebar-container-overlay .active-cross {
+    position: absolute;
+    top: 2%;
+    right: 5%;
+    font-size: 25px;
+    color: rgb(207, 207, 207);
+    padding: 6px;
+    border-radius: 50%;
+}
+
+.sidebar-container-overlay .sidebar-top {
+    margin-top: 70px;   
+}
+
+.sidebar-container-overlay .sidebar-top, 
+.sidebar-container-overlay .sidebar-bottom {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: rgb(207, 207, 207);
+    animation: fadeIn 0.36s ease-in;
+}
+
+.sidebar-container-overlay .sidebar-top .hamburger {
+    display: none;
+}
+
+.sidebar-container-overlay .sidebar-top .icon, 
+.sidebar-container-overlay .sidebar-bottom .icon {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 30px;
+    transition: 0.1s ease-in;
+}
+
+@keyframes sidebarOpen {
+  from {
+    width: 0px;
+    opacity: 0;
+  }
+  to {
+    width: 250px;
+    opacity: 1;
+  }
+}
+
+@keyframes sidebarClose {
+  from {
+    width: 250px;
+  }
+  to {
+    width: 76px;
+  }
+}
+
+@media (max-width: 960px) {
+    .sidebar-container {
+        display: none;
+    }
 }

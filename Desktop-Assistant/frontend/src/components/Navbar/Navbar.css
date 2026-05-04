@@ -1,0 +1,41 @@
+.navbar-container {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    padding-top: 8px;
+}
+
+.navbar-container .contents .app-name-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+}
+
+.navbar-container .contents .app-name-container .app-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(235, 235, 235);
+}
+
+.navbar-container .contents .app-name-container .app-name h1 {
+    font-weight: 500;
+    font-size: 32px;
+}
+
+.navbar-container .contents .app-name-container .hamburger .icon {
+    padding: 8px;
+    font-size: 18px;
+    border-radius: 50%;
+    transition: 0.1s ease-in;
+
+    display: none;
+}
+
+@media (max-width:960px) {
+    .navbar-container .contents .app-name-container .hamburger .icon {
+        display: block;
+    }
+}

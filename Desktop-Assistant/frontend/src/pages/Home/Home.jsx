@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { sendMessage } from "../../api/assistant_api";
 
+import Navbar from "../../components/Navbar/Navbar";
 import SideBar from "../../components/SideBar/SideBar";
 import ChatWindow from "../../components/ChatWindow/ChatWindow";
 import ChatInput from "../../components/ChatInput/ChatInput";
@@ -9,6 +10,7 @@ import ChatInput from "../../components/ChatInput/ChatInput";
 import "./Home.css";
 
 const Home = () => {
+  const [hamburgerClick, setHamburgerClick] = useState(false);
   const [messages, setMessages] = useState([]); // store chat history
   const messagesRef = useRef(null);
 
@@ -34,8 +36,17 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <SideBar />
+      <SideBar 
+        setMessages={setMessages} 
+        hamburgerClick={hamburgerClick}
+        setHamburgerClick={setHamburgerClick}
+      />
       <div className="home-middle">
+        <Navbar 
+          hamburgerClick={hamburgerClick}
+          setHamburgerClick={setHamburgerClick}
+        />
+
         <div className={messages.length === 0 ? "header" : "header-chat-active"}>
           <div className="welcome-msg">
             <h2>Hi JustChillinBro</h2>

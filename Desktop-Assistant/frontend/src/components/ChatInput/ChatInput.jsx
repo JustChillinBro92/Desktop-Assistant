@@ -25,10 +25,6 @@ const ChatInput = ({ handleSend }) => {
       onSendHandler();
   }
 
-  // useEffect(()=>{
-  //   console.log(input);
-  // },[input])
-
   return (
     <div className="input-container">
       <div className="text-box-container">

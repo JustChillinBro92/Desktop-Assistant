@@ -1,6 +1,5 @@
 .home-container {
   display: flex;
-  justify-content: start;
   height: 100vh;
 }
 
@@ -13,12 +12,18 @@
   color: rgb(235, 235, 235);
 }
 
+.home-container .home-middle .header {
+  display: flex;
+  justify-content: center;
+}
+
 .home-container .home-middle .header .welcome-msg {
   display: flex;
   align-items: start;
   flex-direction: column;
+  text-align: left;
 
-  margin: 0 25%;
+  width: 820px;
   padding: 20px;
   z-index: 0;
 }
@@ -30,19 +35,16 @@
 .home-container .home-middle .header .welcome-msg h2 {
   font-weight: 500;
   font-size: 25px;
-  animation: ZoomLeft 0.2s ease-in-out;
+  animation: ZoomLeft 0.5s ease-in-out;
 }
 
 .home-container .home-middle .header .welcome-msg h1 {
   font-weight: 500;
   font-size: 36px;
-  animation: ZoomUp 0.2s ease-in-out;
+  animation: ZoomUp 0.5s ease-in-out;
 }
 
 .home-container .home-middle .messages-chat-active {
-  /* height: 100vh;
-  padding-top: 20px; */
-
   height: calc(100vh - 120px);
   padding: 20px 0 140px;
   overflow-y: auto;
@@ -85,5 +87,16 @@
   100% {
     opacity: 1;
     transform: translateX(0%);
+  }
+}
+
+
+@media (max-width: 960px) {
+  .home-container .home-middle {
+    justify-content: end;
+  }
+
+  .home-container .home-middle .header .welcome-msg {
+    width: 750px;
   }
 }
