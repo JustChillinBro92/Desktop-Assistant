@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from core.assistant import run_user_message
+from core.llm import clear_chat_history
 
 app = FastAPI()
 
@@ -29,3 +30,8 @@ def home():
 def text_mode(req: ChatRequest):
     result = run_user_message(req.message)
     return result
+
+@app.post("/new-chat")
+def new_chat():
+    clear_chat_history()
+    return {"status" : "New Chat Started!"}

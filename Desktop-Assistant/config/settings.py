@@ -2,8 +2,8 @@
 LLM_PROVIDER = "gemini"
 
 # model
-# MODEL_NAME = "gemini-3.1-flash-lite-preview"
-MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME = "gemini-3.1-flash-lite-preview"
+# MODEL_NAME = "gemini-2.5-flash"
 # MODEL_NAME = "gemini-2.5-flash-lite"
 VOICE_MODEL_NAME = "gemini-3.1-flash-live-preview"
 
@@ -35,6 +35,8 @@ AVAILABLE ACTIONS:
 
 RULES:
 - If user is chatting or asking a normal question, use "chat".
+- While using "chat" chat with the user like any normal ai agent would. 
+- While using "chat" if user demands something make sure to fulfill it.
 - If user wants to open/launch/start software, use "open_app".
 - If user wants to play/open/launch/start a game, use "open_game".
 - NEVER use "unknown" for valid English sentences.
@@ -71,7 +73,7 @@ User: asdfgh
 """
 
 VOICE_SYSTEM_PROMPT = """
-You are a female desktop voice assistant.
+You are Luna, a female desktop voice assistant.
 
 You can have normal conversations with the user.
 

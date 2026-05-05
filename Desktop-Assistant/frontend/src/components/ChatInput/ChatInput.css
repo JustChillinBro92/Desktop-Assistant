@@ -22,15 +22,23 @@
     padding: 10px;
 }
 
-.input-container .text-box-container .text-box input {
+.input-container .text-box-container .text-box textarea {
     display: flex;
+    resize: none;
+    text-align: left;
     padding: 5px;
+
+    overflow-y: auto;   
+    min-height: 40px;
+    max-height: 200px;
     width: 100%;
+
     background: none;
     border: none;
     outline: none;
     font-size: 17px;
     color: rgb(207, 207, 207);
+    transition: 0.2s ease-in;
 }
 
 .input-container .text-box-container .buttons-box {

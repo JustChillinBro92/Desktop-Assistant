@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, Menu } from "electron";
 import { spawn } from "child_process";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -33,12 +33,21 @@ function startBackend() {
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1100,
-    height: 700,
+    width: 1200,
+    height: 800,
     show: true,
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+      color: '#000000',       
+      symbolColor: '#ffffff',  
+      height: 30,
+                   
+    }
   });
 
   mainWindow.loadURL("http://localhost:5173");
+  
+  Menu.setApplicationMenu(null);
 }
 
 app.whenReady().then(() => {

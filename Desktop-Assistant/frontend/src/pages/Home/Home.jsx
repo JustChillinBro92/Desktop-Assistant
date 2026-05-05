@@ -14,12 +14,6 @@ const Home = () => {
   const [messages, setMessages] = useState([]); // store chat history
   const messagesRef = useRef(null);
 
-  useEffect(() => {
-    if (messagesRef.current) {
-      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
-    }
-  }, [messages]);
-
   const handleSend = async (userInput) => {
     // add user message to previous chat state
     setMessages((prev) => [...prev, { role: "user", text: userInput }]);
@@ -33,6 +27,20 @@ const Home = () => {
       { role: "assistant", text: aiResonse.message || "No response!" },
     ]);
   };
+
+  // reset chat history on page refresh
+  useEffect(() => {
+    fetch("http://localhost:8000/new-chat", {
+      method: "POST",
+    });
+  },[]);
+
+  // auto scroll to end of page
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   return (
     <div className="home-container">

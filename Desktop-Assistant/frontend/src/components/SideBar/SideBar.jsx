@@ -1,4 +1,4 @@
-import React, { use, useEffect } from "react";
+import { use, useEffect } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faGear } from "@fortawesome/free-solid-svg-icons";
@@ -7,7 +7,12 @@ import { faPenToSquare, faCircleXmark } from "@fortawesome/free-regular-svg-icon
 import "./SideBar.css";
 
 const SideBar = ({ setMessages, hamburgerClick, setHamburgerClick }) => {
-  const handleNewChat = () => {
+
+  const handleNewChat = async () => {
+    await fetch("http://localhost:8000/new-chat", {
+      method: "POST",
+    })
+
     setMessages([]);
   }
 
