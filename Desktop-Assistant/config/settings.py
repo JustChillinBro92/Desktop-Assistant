@@ -2,10 +2,12 @@
 LLM_PROVIDER = "gemini"
 
 # model
-MODEL_NAME = "gemini-3.1-flash-lite-preview"
+MODEL_NAME = "gemini-3.1-flash-lite"
+VOICE_MODEL_NAME = "gemini-3.1-flash-live-preview"
+
+# MODEL_NAME = "gemini-3.1-flash-lite-preview"
 # MODEL_NAME = "gemini-2.5-flash"
 # MODEL_NAME = "gemini-2.5-flash-lite"
-VOICE_MODEL_NAME = "gemini-3.1-flash-live-preview"
 
 
 # generation settings

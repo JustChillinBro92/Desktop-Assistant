@@ -127,6 +127,7 @@ async def run_voice_agent(audio_chunks):
         response_modalities=["AUDIO"],
         system_instruction=VOICE_SYSTEM_PROMPT,
         tools=[
+            # 1. Custom Tools
             types.Tool(
                 function_declarations=[
                     open_app_tool,
