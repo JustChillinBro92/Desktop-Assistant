@@ -1,15 +1,13 @@
 # Desktop Assistant
 
-A versatile desktop application built with Python, JavaScript, CSS, and HTML that provides helpful utilities and assistance features. This project combines a robust Python backend with an interactive web-based frontend to deliver a seamless user experience for desktop automation and assistance tasks.
+A versatile desktop application built with Python, JavaScript, CSS, and HTML that provides helpful utilities and assistance features. This project combines a robust Python backend with an interactive frontend.
 
-### Language Composition
-
-```
-Python      ████████████████████████████████████████████████░░░░░░░░░░ 54.0%
-JavaScript  ██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 25.4%
-CSS         ███████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 19.8%
-HTML        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░���░░░░░░░░░░░░  0.8%
-```
+![Python](https://img.shields.io/badge/Python-54%25-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-25.4%25-yellow)
+![CSS](https://img.shields.io/badge/CSS-19.8%25-orange)
+![HTML](https://img.shields.io/badge/HTML-0.8%25-red)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Built with](https://img.shields.io/badge/Built%20with-Python%20%26%20JavaScript-47848F)
 
 ## 📋 Table of Contents
 
@@ -143,7 +141,7 @@ Desktop-Assistant/
 │   ├── css/
 │   │   ├── style.css     # Main stylesheet
 │   │   └── responsive.css # Responsive design rules
-���   └── js/
+│   └── js/
 │       ├── app.js        # Main JavaScript
 │       ├── handlers.js   # Event handlers
 │       └── api.js        # API communication
@@ -240,7 +238,7 @@ Under the following conditions:
 
 - Thanks to all contributors who have helped with this project
 - Inspired by the open-source community
-- Built with ❤��� using modern web technologies
+- Built with ❤️ using modern web technologies
 
 ---
 
